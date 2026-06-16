@@ -1,4 +1,3 @@
-/* Reset & Base Style */
 * {
     box-sizing: border-box;
     margin: 0;
@@ -7,13 +6,13 @@
 }
 
 :root {
-    --primary-color: #4f46e5;      /* Indigo */
+    --primary-color: #4f46e5;
     --primary-hover: #4338ca;
-    --success-color: #10b981;      /* Emerald Green */
+    --success-color: #10b981;
     --success-hover: #059669;
-    --danger-color: #ef4444;       /* Rose Red */
+    --danger-color: #ef4444;
     --danger-hover: #dc2626;
-    --bg-color: #f8fafc;           /* Slate Light */
+    --bg-color: #f8fafc;
     --card-bg: #ffffff;
     --text-main: #1e293b;
     --text-muted: #64748b;
@@ -33,7 +32,6 @@ body {
     gap: 14px;
 }
 
-/* Header */
 header h2 {
     font-size: 1.25rem;
     color: var(--primary-color);
@@ -43,10 +41,25 @@ header h2 {
 header .subtitle {
     font-size: 0.8rem;
     color: var(--text-muted);
+}
+
+.header-meta {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
     margin-top: 2px;
 }
 
-/* Input Section */
+.wm {
+    font-size: 0.75rem;
+    color: var(--text-muted);
+    font-style: italic;
+    background: #f1f5f9;
+    padding: 1px 6px;
+    border-radius: 4px;
+    border: 1px dashed var(--border-color);
+}
+
 .input-section {
     display: flex;
     flex-direction: column;
@@ -78,7 +91,6 @@ textarea:focus {
     box-shadow: 0 0 0 3px rgba(79, 70, 229, 0.1);
 }
 
-/* Divider */
 .divider {
     border: 0;
     height: 1px;
@@ -86,7 +98,6 @@ textarea:focus {
     margin: 4px 0;
 }
 
-/* Viewer Section */
 .viewer-header {
     display: flex;
     justify-content: space-between;
@@ -142,7 +153,6 @@ textarea:focus {
     text-align: center;
 }
 
-/* Buttons Styling */
 .button-group {
     display: flex;
     gap: 8px;
@@ -197,17 +207,41 @@ textarea:focus {
     color: white;
 }
 
-.btn-link {
+.footer-buttons {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    gap: 10px;
+    margin-top: 4px;
+}
+
+.btn-link-danger {
     background: none;
     color: var(--text-muted);
     font-size: 0.8rem;
+    border: none;
+    cursor: pointer;
     text-decoration: underline;
-    width: 100%;
-    padding: 4px;
 }
-.btn-link:hover { color: var(--danger-color); }
+.btn-link-danger:hover { color: var(--danger-color); }
 
-/* Scrollbar Customization */
+.btn-donate {
+    background: linear-gradient(135deg, #ff9800, #f57c00);
+    color: white;
+    padding: 6px 12px;
+    font-size: 0.8rem;
+    font-weight: 600;
+    border: none;
+    border-radius: 6px;
+    cursor: pointer;
+    box-shadow: 0 2px 4px rgba(245, 124, 0, 0.2);
+    transition: transform 0.1s, box-shadow 0.1s;
+}
+.btn-donate:hover {
+    transform: translateY(-1px);
+    box-shadow: 0 4px 6px rgba(245, 124, 0, 0.3);
+}
+
 #answerView::-webkit-scrollbar {
     width: 4px;
 }
