@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <title>Google Form AutoFill Pro</title>
+    <link rel="stylesheet" href="popup.css">
+</head>
+<body>
+
+    <div class="app-container">
+        <header>
+            <h2>⚡ Form AutoFill</h2>
+            <p class="subtitle">Import & isi data gform instan</p>
+        </header>
+
+        <main>
+            <section class="input-section">
+                <label for="responsesInput">Data Jawaban AI</label>
+                <textarea
+                    id="responsesInput"
+                    placeholder="Paste jawaban AI di sini...&#10;Contoh:&#10;Nama: Budi&#10;Umur: 20"
+                ></textarea>
+                <button id="importBtn" class="btn btn-primary">
+                    Import Responses
+                </button>
+            </section>
+
+            <hr class="divider">
+
+            <section class="viewer-section">
+                <div class="viewer-header">
+                    <span class="label">Preview Data</span>
+                    <div id="counter">No Data</div>
+                </div>
+                
+                <div id="answerView" class="empty-state">
+                    Belum ada data yang di-import.
+                </div>
+            </section>
+
+            <div class="button-group grid-2">
+                <button id="prevBtn" class="btn btn-secondary">◀ Prev</button>
+                <button id="nextBtn" class="btn btn-secondary">Next ▶</button>
+            </div>
+
+            <div class="button-group grid-2">
+                <button id="fillBtn" class="btn btn-success">Fill Form</button>
+                <button id="deleteBtn" class="btn btn-danger">Delete Current</button>
+            </div>
+        </main>
+
+        <footer>
+            <button id="clearBtn" class="btn btn-link">Clear All Data</button>
+        </footer>
+    </div>
+
+    <script src="parser.js"></script>
+    <script src="storage.js"></script>
+    <script src="popup.js"></script>
+
+</body>
+</html>
