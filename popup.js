@@ -8,6 +8,7 @@ const counter = document.getElementById("counter");
 const prevBtn = document.getElementById("prevBtn");
 const nextBtn = document.getElementById("nextBtn");
 const fillBtn = document.getElementById("fillBtn");
+const stopBtn = document.getElementById("stopBtn"); // Elemen baru
 const deleteBtn = document.getElementById("deleteBtn");
 const clearBtn = document.getElementById("clearBtn");
 const donateBtn = document.getElementById("donateBtn");
@@ -32,6 +33,21 @@ function renderCurrentAnswer() {
 
     answerView.innerHTML = html;
 }
+
+// Listener untuk mendeteksi perubahan storage (supaya counter n/n berubah live)
+chrome.storage.onChanged.addListener((changes, area) => {
+    if (area === "local" && changes.currentIndex) {
+        currentIndex = changes.currentIndex.newValue;
+        renderCurrentAnswer();
+    }
+    // Jika dari background/content script loopActive dimatikan, samakan centang checkbox di UI
+    if (area === "local" && changes.loopActive) {
+        const autoSubmitCheck = document.getElementById("autoSubmitCheck");
+        if (autoSubmitCheck) {
+            autoSubmitCheck.checked = changes.loopActive.newValue;
+        }
+    }
+});
 
 importBtn.addEventListener("click", async () => {
     if (!input.value.trim()) {
@@ -102,6 +118,9 @@ fillBtn.addEventListener("click", async () => {
         return;
     }
 
+    const autoSubmitCheck = document.getElementById("autoSubmitCheck");
+    const isAutoSubmitMode = autoSubmitCheck ? autoSubmitCheck.checked : false;
+    
     const answer = responses[currentIndex];
     const tabs = await chrome.tabs.query({
         active: true,
@@ -113,10 +132,30 @@ fillBtn.addEventListener("click", async () => {
         return;
     }
 
+    await chrome.storage.local.set({ 
+        loopActive: isAutoSubmitMode,
+        currentIndex: currentIndex 
+    });
+
     await chrome.tabs.sendMessage(tabs[0].id, {
         type: "FILL_FORM",
         data: answer
     });
+});
+
+// LOGIKA TOMBOL STOP (EMERGENCY BRAKE)
+stopBtn.addEventListener("click", async () => {
+    // Matikan status loop otomatis di storage
+    await chrome.storage.local.set({ loopActive: false });
+    
+    // Hilangkan centang di UI Popup secara langsung
+    const autoSubmitCheck = document.getElementById("autoSubmitCheck");
+    if (autoSubmitCheck) {
+        autoSubmitCheck.checked = false;
+    }
+    
+    console.log("Otomatisasi dihentikan paksa oleh pengguna.");
+    alert("Otomatisasi Berhenti! Bot tidak akan melanjutkan ke data berikutnya.");
 });
 
 donateBtn.addEventListener("click", () => {
@@ -128,6 +167,12 @@ async function init() {
     responses = data.responses;
     currentIndex = data.currentIndex;
     renderCurrentAnswer();
+
+    const dataStorage = await chrome.storage.local.get("loopActive");
+    const autoSubmitCheck = document.getElementById("autoSubmitCheck");
+    if (autoSubmitCheck && dataStorage.loopActive !== undefined) {
+        autoSubmitCheck.checked = dataStorage.loopActive;
+    }
 }
 
 init();

@@ -11,8 +11,8 @@
         <header>
             <h2>Form AutoFill</h2>
             <div class="header-meta">
-                <p class="subtitle">Import & isi data gform instan</p>
-                <span class="wm">by: remdeng</span>
+                <p class="subtitle">Import & Fill Gform Instan</p>
+                <span class="wm">by: remdeengg</span>
             </div>
         </header>
 
@@ -46,9 +46,17 @@
                 <button id="nextBtn" class="btn btn-secondary">Next ▶</button>
             </div>
 
-            <div class="button-group grid-2">
+            <section class="automation-control" style="margin: 4px 0 10px 0; display: flex; align-items: center; gap: 8px;">
+                <input type="checkbox" id="autoSubmitCheck" style="cursor: pointer; width: 16px; height: 16px;">
+                <label for="autoSubmitCheck" style="font-size: 0.85rem; cursor: pointer; user-select: none; font-weight: 600; color: var(--text-main);">
+                    Automatic Submit & Answer
+                </label>
+            </section>
+
+            <div class="button-group" style="display: grid; grid-template-columns: 2fr 1fr 1fr; gap: 6px;">
                 <button id="fillBtn" class="btn btn-success">Fill Form</button>
-                <button id="deleteBtn" class="btn btn-danger">Delete Current</button>
+                <button id="stopBtn" class="btn btn-danger" style="background-color: #f43f5e; color: white;">STOP</button>
+                <button id="deleteBtn" class="btn btn-secondary" style="font-size: 0.75rem; padding: 10px 4px;">Del</button>
             </div>
         </main>
 
