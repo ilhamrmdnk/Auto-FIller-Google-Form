@@ -51,10 +51,8 @@ Firefox has a stricter security policy for local, unsigned extensions. You can l
 * **Multi-Page Support:** Dynamically scans active questions on multi-section forms, skipping missing fields until they appear on subsequent pages.
 * **Data Preview:** Allows verification of mapped data before filling out the active form.
 
-### Crucial Note Regarding Dropdowns & Selection
-Our dropdown injection uses a high-frequency polling script tailored for the specific Google Form DOM structure (`span.vRMGwf`). 
-* **Exact Matching:** Ensure your input data matches the dropdown option text. If the form option is `"Laki-laki"`, writing `"laki-laki"` will be handled safely by the lowercase built-in handler, but typos will cause the bot to skip the element to prevent page freezing.
-* **Safety Mechanism:** If a dropdown option cannot be matched within the polling timeout limit, the extension will automatically re-close the dropdown panel to prevent it from hanging or blocking other elements on the screen.
+### Important Note Regarding Dropdowns
+Due to the dynamic way Google Forms loads dropdown components, the autofill process cannot select a dropdown option completely automatically on its own. To fill a dropdown question, you must first click and open the dropdown menu manually on the form. Once the menu is open, the extension will instantly detect the options and select the correct answer for you.
 
 ---
 
